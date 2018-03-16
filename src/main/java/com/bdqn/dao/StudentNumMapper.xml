@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bdqn.dao.StudentNumMapper">
+    <insert id="addStudentNum" parameterType="int">
+        insert into student_num values(null,#{id},0)
+
+    </insert>
+    <update id="updateMaxNumByGradeId" parameterType="int">
+      UPDATE student_num SET max_num=max_num+1 WHERE grade_id=#{id}
+    </update>
+    <select id="queryMaxNumByGradeId" parameterType="int" resultType="int">
+      SELECT max_num FROM student_num WHERE grade_id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bdqn.dao.HobbyMapper">
+    <resultMap id="hobbyMap" type="Hobby">
+        <id property="id" column="id"/>
+        <result property="hobbyName" column="hobby_name"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+    <insert id="addHobby" parameterType="Hobby">
+      insert into hobby VALUES (null,#{hobbyName},now())
+    </insert>
+    <update id="updateHobby" parameterType="Hobby">
+        update hobby set hobby_name=#{hobbyName} where id=#{id}
+    </update>
+    <delete id="deleteHobby" parameterType="int">
+        delete from hobby where id=#{id}
+    </delete>
+
+    <delete id="deleteHobbyByIds">
+        delete from hobby where id in
+        <foreach collection="list" item="ids" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="queryAll" resultMap="hobbyMap">
+        select * from hobby order by create_time DESC
+    </select>
+    <select id="detailHobbyById" resultMap="hobbyMap" parameterType="int">
+        select * from hobby where id=#{id}
+    </select>
+</mapper>
