@@ -11,6 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TUserServicesTest {
     @Test
     public void loginUser() throws Exception {
+        System.out.println("1");
+
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TUserServices services = (TUserServices) context.getBean("userServices");
         TUser tUser = services.loginUser(new TUser(0, "admin", "1231", ""));
